@@ -1,0 +1,10 @@
+=== $(date) ===
+PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+64 bytes from 8.8.8.8: icmp_seq=1 ttl=106 time=23.2 ms
+64 bytes from 8.8.8.8: icmp_seq=2 ttl=106 time=22.8 ms
+64 bytes from 8.8.8.8: icmp_seq=3 ttl=106 time=22.8 ms
+64 bytes from 8.8.8.8: icmp_seq=4 ttl=106 time=22.8 ms
+
+--- 8.8.8.8 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3004ms
+rtt min/avg/max/mdev = 22.795/22.897/23.179/0.162 ms

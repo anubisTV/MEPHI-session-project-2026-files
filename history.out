@@ -1,0 +1,135 @@
+    1  lsblk -f
+    2  sudo parted /dev/sdb mklabel gpt
+    3  sudo parted /dev/sdb mkpart primary ext4 0% 100%
+    4  lsblk -f /dev/sdb
+    5  sudo mkfs.ext4 -L MEPHI_WEB /dev/sdb1
+    6  sudo blkid -o value -s LABEL /dev/sdb1
+    7  sudo mkdir -p /mephi-web
+    8  sudo mount -L MEPHI_WEB /mephi-web
+    9  df -hT | grep mephi
+   10  mount | grep mephi
+   11  LABEL=MEPHI_WEB  /mephi-web  ext4  defaults,noatime  0  2
+   12  echo 'LABEL=MEPHI_WEB  /mephi-web  ext4  defaults,noatime  0  2' | sudo tee -a /etc/fstab
+   13  sudo mount -a
+   14  df -hT /mephi-web
+   15  sudo systemctl start nginx
+   16  sudo systemctl enable nginx
+   17  nginx status
+   18  sudo systemctl status nginx
+   19  [200~sudo mkdir -p /opt/gis-project/reports~
+   20  sudo mkdir -p /opt/gis-project/reports~
+   21  sudo journalctl -u nginx -b --no-pager > /opt/gis-project/reports/journalctl.out
+   22  ls -l /opt/gis-project/reports/journalctl.out
+   23  sudo mkdir -p /data/mephi-2026
+   24  cd /data/mephi-2026
+   25  sudo groupadd -g 4444 curators
+   26  sudo useradd -u 5501 -m -s /bin/bash user1
+   27  sudo useradd -u 5502 -m -s /bin/bash user2
+   28  sudo useradd -u 5503 -m -s /bin/bash user3
+   29  sudo useradd -m -s /bin/bash curator1
+   30  sudo useradd -m -s /bin/bash curator2
+   31  sudo usermod -aG curators curator1
+   32  sudo usermod -aG curators curator2
+   33  sudo groupadd -g 5500 devs
+   34  sudo usermod -aG devs user1
+   35  sudo usermod -aG devs user2
+   36  sudo usermod -aG devs user3
+   37  sudo chown root:devs /data/mephi-2026
+   38  sudo chmod 2770 /data/mephi-2026
+   39  sudo setfacl -m g:curators:r-X /data/mephi-2026
+   40  sudo setfacl -d -m g:curators:r-X /data/mephi-2026
+   41  ls -ld /data/mephi-2026
+   42  getfacl /data/mephi-2026
+   43  ls -ld /data/mephi-2026
+   44  sudo -u user1 touch /data/mephi-2026/file-from-user1.txt
+   45  sudo -u user2 cat /data/mephi-2026/file-from-user1.txt
+   46  sudo -u user3 chmod +x /data/mephi-2026/file-from-user1.tx
+   47  sudo -u user3 chmod +x /data/mephi-2026/file-from-user1.txt
+   48  sudo -u curator1 cat /data/mephi-2026/file-from-user1.txt
+   49  sudo -u curator1 touch /data/mephi-2026/test-curator.txt
+   50  sudo -u nobody ls /data/mephi-2026
+   51  sudo mkdir -p /opt/gis-project/reports
+   52  getfacl /data/mephi-2026 > /opt/gis-project/reports/acl-mephi-2026.out
+   53  cat /opt/gis-project/reports/acl-mephi-2026.out
+   54  ls -ld /data/mephi-2026 >> /opt/gis-project/reports/acl-mephi-2026.out
+   55  id user1 >> /opt/gis-project/reports/acl-mephi-2026.out
+   56  id user2 >> /opt/gis-project/reports/acl-mephi-2026.out
+   57  id user3 >> /opt/gis-project/reports/acl-mephi-2026.out
+   58  id curator1 >> /opt/gis-project/reports/acl-mephi-2026.out
+   59  id curator2 >> /opt/gis-project/reports/acl-mephi-2026.out
+   60  sudo groupadd pcap
+   61  sudo usermod -aG pcap user1
+   62  sudo chgrp pcap /usr/sbin/tcpdump
+   63  sudo chmod 750 /usr/sbin/tcpdump
+   64  sudo setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
+   65  getcap /usr/sbin/tcpdump
+   66  sudo -u user1 tcpdump -i lo -c 1
+   67  getenforce
+   68  sudo setenforce 1
+   69  sudo mkdir -p /mephi-web
+   70  sudo echo "MAC test" > /mephi-web/index.html
+   71  sudo mkdir -p /mephi-web
+   72  sudo echo "MAC test" > /mephi-web/index.html
+   73  sudo sh -c 'echo "MAC test" > /mephi-web/index.html'
+   74  sudo semanage fcontext -a -t httpd_sys_content_t '/mephi-web(/.*)?'
+   75  sudo restorecon -Rv /mephi-web
+   76  ls -Z /mephi-web
+   77  sudo systemctl reload nginx
+   78  curl -s http://localhost | grep "MAC test"
+   79  sudo sh -c 'echo "MAC test" > /mephi-web/index.html'
+   80  sudo semanage fcontext -a -t httpd_sys_content_t '/mephi-web(/.*)?'
+   81  sudo restorecon -Rv /mephi-web
+   82  ls -Z /mephi-web
+   83  sudo systemctl reload nginx
+   84  curl -s http://localhost | grep "MAC test"
+   85  sudo curl -s http://localhost | grep "MAC test"
+   86  sudo ss -tlnp | grep 80
+   87  sudo systemctl status nginx
+   88  ls -l /mephi-web/index.html
+   89  cat /mephi-web/index.html
+   90  ls -Z /mephi-web/index.html
+   91  sudo nginx -t && sudo systemctl reload nginx
+   92  curl -s http://localhost | grep "MAC test"
+   93  curl -v http://localhost
+   94  history > /opt/gis-project/reports/history.out
+   95  sudo nginx -T | grep -i "server {" -A 20
+   96  sudo nano /etc/nginx/nginx.conf
+   97  sudo nginx -t
+   98  sudo systemctl reload nginx
+   99  curl -s http://localhost | grep "MAC test"
+  100  history > /opt/gis-project/reports/history.out
+  101  { stat /mephi-web/index.html; ls -Z /mephi-web/index.html; } > /opt/gis-project/reports/stat.out 2>&1
+  102  getcap \$(which nginx) > /opt/gis-project/reports/getcap.out 2>&1
+  103  getenforce > /opt/gis-project/reports/getenforce.out
+  104  sudo cp /etc/fstab /opt/gis-project/reports/
+  105  sudo cp /etc/passwd /etc/group /opt/gis-project/reports/
+  106  curl -s http://localhost | grep "MAC test" > /opt/gis-project/reports/curl.out 2>&1
+  107  cat /opt/gis-project/reports/curl.out
+  108  sudo update-mime-database /usr/share/mime
+  109  history > /opt/gis-project/reports/history.out
+  110  sudo nano /etc/security/access.conf
+  111  account required pam_access.so
+  112  getent group curators
+  113  sudo nano /etc/pam.d/login
+  114  ls -l /etc/security/access.conf
+  115  sudo nano /etc/pam.d/system-auth
+  116  sudo nano /etc/login.defs
+  117  for u in $(cut -d: -f1 /etc/passwd); do sudo chage -M 90 "$u"; done
+  118  history > /opt/gis-project/reports/history.out
+  119  { stat /mephi-web/index.html; ls -Z /mephi-web/index.html; } > /opt/gis-project/reports/stat.out 2>&1
+  120  sudo cp /etc/passwd /etc/group /opt/gis-project/reports/
+  121  sudo cp /etc/security/pwquality.conf /opt/gis-project/reports/
+  122  sudo mkdir -p /mephi-web
+  123  echo "Hello from Student: 372585" | sudo tee /mephi-web/index.html
+  124  sudo chown root:root /mephi-web/index.html
+  125  sudo chmod 644 /mephi-web/index.html
+  126  sudo systemctl reload nginx
+  127  curl -s http://localhost/
+  128  sudo cp -p /etc/shadow /opt/gis-project/reports/
+  129  git clone https://github.com/anubisTV/MEPHI-session-project-2026-files.git
+  130  sudo git clone https://github.com/anubisTV/MEPHI-session-project-2026-files.git
+  131  cd MEPHI-session-project-2026-files
+  132  sudo cd MEPHI-session-project-2026-files
+  133  cd MEPHI-session-project-2026-files
+  134  sudo cd MEPHI-session-project-2026-files
+  135  history > /opt/gis-project/reports/history.out

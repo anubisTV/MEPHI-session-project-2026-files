@@ -1,0 +1,7 @@
+Иденти | Командная строка                                        | Дата и время     | Действия       | Изменен
+--------------------------------------------------------------------------------------------------------------
+     5 | install -y nginx libcap-ng-utils                        | 2026-10-11 13:27 | Install        |    5   
+     4 | update -y                                               | 2026-10-11 13:18 | I, O, U        |  324 E<
+     3 | autoremove -y --setopt=metadata_expire=-1               | 2026-10-11 12:29 | Removed        |    1 ><
+     2 | remove -y --setopt=metadata_expire=-1 open-vm-tools spi | 2026-10-11 12:28 | Removed        |    2 >E
+     1 |                                                         | 2026-10-11 12:21 | Install        | 1852 EE
